@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = process.env.POST || 4000;
+const port = process.env.PORT || 4000;
 
 // Routes Import
 const indexRoute = require("./routes/index.js");
