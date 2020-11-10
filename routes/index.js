@@ -12,15 +12,14 @@ const blogposts = db.collection("blogposts");
 router.get("/", (req, res) => {
   // Inside of this arrow function, we can do aanything we along as somethign is returned at the end
   const blogpostsArray = [];
-
   blogposts
     .get()
     .then((querySnapshot) => {
-      // console.log("querySnapshot", querySnapshot);
-      // Loop through query snapshot and push to array
+      // Loop through query snapshot and push into array
       querySnapshot.forEach((doc) => {
         blogpostsArray.push(doc.data());
       });
+      //return array
       return res.send(blogpostsArray);
     })
     .catch(function (e) {
