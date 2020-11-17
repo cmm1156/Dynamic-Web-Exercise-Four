@@ -23,14 +23,17 @@ router.get("/", (req, res) => res.send(form));
 // Route for submitting the form
 router.get("/submit", (req, res) => {
   const queryParams = req.query; // ?title=words&text=words&author=words... { title: "text", }
-  // custom ids for our posts
+  // custom IDs for our posts
   const idFromTitle = queryParams.title.replace(/\s+/g, "-").toLowerCase(); // for any spaces, replace with a dash
+  // inputting 'My Post' will become 'my-post' // ID is shown in Firestore console
 
   blogposts
     .doc(idFromTitle)
     .set(queryParams) // ?title=words&text=words&author=words
     .then(function (doc) {
-      res.send("Successful Submission");
+      res.send(
+        `<h1>Successful Submission</h1><p><a href="/create">Create another post</a></p>`
+      );
     })
     .catch(function (error) {
       console.log("error", error);
